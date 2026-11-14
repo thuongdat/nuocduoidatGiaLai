@@ -988,6 +988,22 @@ button, input, select { font-family: inherit; font-size: inherit; color: inherit
 
 .hop-thoai__than { padding: 16px 18px; overflow-y: auto; }
 
+/* Bieu nhap mat khau truoc khi xuat tep, xem xuat_tep.js */
+.bieu-mat-khau input[type="password"] {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px 10px;
+  border: 1px solid var(--vien);
+  border-radius: var(--bo-goc);
+  background: var(--nen-the);
+  color: var(--chu);
+  outline: none;
+}
+
+.bieu-mat-khau input[type="password"]:focus { border-color: var(--xanh-nhan); }
+
+.bieu-mat-khau__loi { margin: 8px 0 0; font-size: 12.5px; color: #c0392b; }
+
 /* Danh sach canh bao trong hop thoai */
 .hang-canh-bao {
   display: flex;
