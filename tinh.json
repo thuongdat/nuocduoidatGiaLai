@@ -1,0 +1,62 @@
+{
+  "ma": "gia-lai",
+  "ten_tinh": "Tỉnh Gia Lai",
+  "ten_ngan": "Gia Lai",
+  "ten_he_thong": "Tài nguyên nước Gia Lai",
+  "don_vi": "Sở Nông nghiệp và Môi trường tỉnh Gia Lai",
+  "hop_thanh_tu": "tỉnh Bình Định và tỉnh Gia Lai",
+  "hieu_luc_sap_nhap": "01/07/2025",
+  "ban_do": {
+    "tam": [
+      13.85,
+      108.41
+    ],
+    "zoom": 9,
+    "pham_vi_dat_lien": [
+      [
+        12.99,
+        107.44
+      ],
+      [
+        14.71,
+        109.38
+      ]
+    ],
+    "pham_vi_toan_tinh": [
+      [
+        12.99,
+        107.44
+      ],
+      [
+        14.71,
+        109.38
+      ]
+    ],
+    "ghi_chu_pham_vi": "Không có huyện đảo xa bờ nên phạm vi đất liền trùng với phạm vi toàn tỉnh."
+  },
+  "khung_bao_nen": [
+    107.4,
+    12.95,
+    109.42,
+    14.75
+  ],
+  "lop_co_san": [
+    "ranh_gioi_tinh",
+    "ranh_gioi_xa",
+    "quan_trac_ndd",
+    "ndd_tang_chua_nuoc",
+    "ndd_tru_luong",
+    "ndd_chat_luong",
+    "ndd_nhiem_man",
+    "ndd_o_nhiem",
+    "ndd_vung_han_che",
+    "ndd_luu_vuc",
+    "ndd_gieng_khoan",
+    "ndd_gieng_dao",
+    "ndd_lo_khoan_dia_tang",
+    "ndd_tram_quan_trac"
+  ],
+  "ky_quan_trac": "Năm 2025",
+  "ghi_chu_dau_trang_ndd": "<strong>Phạm vi dữ liệu.</strong> Các lớp tài nguyên nước dưới đất trên trang này hiện chỉ phủ phần Bình Định cũ; phần Gia Lai cũ chưa có bộ dữ liệu tương ứng. Ba lớp vùng nặng (tầng chứa nước, trữ lượng, chất lượng) chỉ tải khi được bật trong cây lớp.",
+  "ghi_chu_dau_trang": "<strong>Phạm vi dữ liệu.</strong> Mọi số liệu trên trang là kết quả kiểm kê thật của tỉnh, không có lớp mô phỏng nào. Ba lớp hiện chỉ phủ phần Bình Định cũ vì bộ dữ liệu gốc của phần Gia Lai cũ chưa có: ao hồ đầm tự nhiên dạng vùng, phân đoạn sông đánh giá sức chịu tải, và mạng quan trắc địa phương. Mỗi đối tượng đều ghi rõ nguồn gốc ở cuối bảng thông tin."
+}
