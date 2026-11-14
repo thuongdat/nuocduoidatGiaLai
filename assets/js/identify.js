@@ -173,6 +173,16 @@ function trong_vong(diem, vong) {
 function hien_chi_tiet(danh_sach, vi_tri_chon) {
   document.getElementById('huong-dan-click').hidden = true;
 
+  /* Tren dien thoai bang thong tin la ngan truot dang thu, phai mo ra thi
+     nguoi dung moi thay ket qua. Man hinh rong thi ton trong lua chon thu
+     gon cua nguoi dung. Khi bang thuoc tinh dang mo thi khong tu mo ngan:
+     hai thu chong len nhau se che het ban do, nguoi dung bam nut "Thong tin
+     doi tuong" neu can. dat_thu_gon() nam o app.js. */
+  if (la_man_hinh_hep() && dang_thu_gon('phai')
+      && !document.getElementById('khu-bang').classList.contains('mo')) {
+    dat_thu_gon('phai', false);
+  }
+
   var o_chon = document.getElementById('chon-doi-tuong');
   var o_select = document.getElementById('danh-sach-trung');
 

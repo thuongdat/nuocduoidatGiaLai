@@ -1144,51 +1144,140 @@ button, input, select { font-family: inherit; font-size: inherit; color: inherit
 }
 
 @media (max-width: 860px) {
-  body { overflow: auto; }
+  /* Tren dien thoai BAN DO DUNG YEN va chiem tron phan giua man hinh. Trang
+     khong cuon: keo ngon tay tren ban do la keo ban do, khong phai cuon
+     trang. Hai bang hai ben thanh ngan truot phu len ban do, thu lai thanh
+     hai nut noi o day ban do. app.js thu san ca hai luc mo trang va mo bang
+     thong tin khi nguoi dung nhap trung doi tuong (xem dat_thu_gon()).
+     Cac quy tac rieng cua trang ban do deu bam vao .than-trang, vi trang
+     thong ke va trang quan trac cung nap tep nay. */
 
+  /* ----- Dau trang: hang 1 ten + o tim kiem, hang 2 menu ----- */
   .dau-trang {
+    position: relative;
     height: auto;
     flex-wrap: wrap;
-    gap: 8px 14px;
-    padding: 10px 12px;
+    gap: 6px 10px;
+    padding: 8px 10px;
   }
 
-  .dau-trang__menu { order: 3; width: 100%; overflow-x: auto; }
+  .logo { width: 24px; height: 24px; }
+  .dau-trang__chu h1 { font-size: 14px; }
+  /* Menu vuot ngang duoc nhung khong hien thanh cuon, do ton chieu cao */
+  .dau-trang__menu { order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; }
+  .dau-trang__menu::-webkit-scrollbar { display: none; }
+  .dau-trang__menu a { white-space: nowrap; }
   .dau-trang__cong-cu { margin-left: auto; }
-  .o-tim-kiem input { width: 150px; }
+  .dau-trang__cong-cu:has(.o-tim-kiem) { flex: 1 1 110px; min-width: 0; }
 
+  .o-tim-kiem { position: static; flex: 1 1 auto; min-width: 0; }
+  .o-tim-kiem input { width: 100%; }
+  /* Danh sach goi y trai het be ngang man hinh thay vi 320px bam mep phai */
+  .ket-qua-tim { top: 44px; left: 8px; right: 8px; width: auto; max-height: 50vh; }
+
+  .dai-thong-bao {
+    padding: 6px 40px 6px 10px;
+    font-size: 11.5px;
+    max-height: 5em;
+    overflow-y: auto;
+  }
+
+  /* ----- Ban do chiem tron than trang ----- */
   .than-trang,
   .than-trang.thu-trai,
   .than-trang.thu-phai,
   .than-trang.thu-trai.thu-phai {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 56vh auto;
+    display: block;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* Hai bang tro thanh khoi gap/mo xep doc duoi ban do */
+  /* z-index: 0 gom moi thu cua Leaflet vao mot ngu canh xep chong rieng; neu
+     khong, nut phong to va dong ghi nguon (z 1000) noi len tren hai ngan. */
+  .khu-ban-do { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0; }
+
+  /* Chua cho cho hai nut noi o day ban do */
+  .khu-ban-do .leaflet-bottom { bottom: 46px; }
+  .hop-toa-do { display: none; }
+
+  /* ----- Hai bang thanh ngan truot ----- */
   .bang-trai, .bang-phai {
+    position: absolute;
+    z-index: 900;
     border: none;
-    border-top: 1px solid var(--vien);
-    max-height: 48vh;
+    box-shadow: var(--bong-lon);
   }
 
-  .bang-trai { order: 2; }
-  .khu-ban-do { order: 1; min-height: 56vh; }
-  .bang-phai { order: 3; }
+  /* Lop du lieu: ngan doc ben trai */
+  .bang-trai { top: 0; bottom: 0; left: 0; width: min(86vw, 330px); }
+
+  /* Thong tin doi tuong: ngan day, de phan tren ban do van thay duoc */
+  .bang-phai {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 58%;
+    border-radius: 12px 12px 0 0;
+  }
+
+  /* Ngan dang mo thi nut la dau dong; mui ten trai phai cua man hinh rong
+     khong con dung huong khi ngan truot tu duoi len. */
+  .nut-thu-gon { width: 32px; height: 32px; font-size: 0; }
+  .nut-thu-gon::before { content: "\00d7"; font-size: 20px; line-height: 1; }
+
+  /* Khi thu: chi con mot nut noi mang ten bang */
+  .thu-trai .bang-trai,
+  .thu-phai .bang-phai {
+    top: auto;
+    bottom: 10px;
+    width: auto;
+    max-height: none;
+    border: 1px solid var(--vien);
+    border-radius: 18px;
+    box-shadow: var(--bong-vua);
+  }
+
+  .thu-trai .bang-trai { left: 10px; right: auto; }
+  .thu-phai .bang-phai { left: auto; right: 10px; }
 
   .thu-trai .bang-trai .bang__tieu-de span,
   .thu-phai .bang-phai .bang__tieu-de span { display: inline; }
 
   .thu-trai .bang-trai .bang__tieu-de,
-  .thu-phai .bang-phai .bang__tieu-de { justify-content: space-between; padding: 10px 12px; }
+  .thu-phai .bang-phai .bang__tieu-de {
+    position: relative;
+    justify-content: center;
+    padding: 8px 14px;
+    border-bottom: none;
+    background: var(--nen-the);
+    color: var(--xanh-sau);
+  }
 
-  .khu-bang.mo .khu-bang__than { height: 300px; }
-  .khu-bang__dau { flex-wrap: wrap; }
-  .khu-bang__nut { margin-left: 0; width: 100%; }
+  /* Nut thu gon trai kin ca nut noi de cham cho nao cung mo duoc */
+  .thu-trai .bang-trai .nut-thu-gon,
+  .thu-phai .bang-phai .nut-thu-gon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    opacity: 0;
+  }
+
+  /* ----- Bang thuoc tinh: mot hang gon, nut xuat chi hien khi mo bang ----- */
+  .khu-bang__dau { flex-wrap: wrap; gap: 6px; padding: 5px 8px; }
+  .khu-bang__dau select { flex: 1 1 0; min-width: 0; max-width: none; }
+  #bang-tom-tat { display: none; }
+  .khu-bang__nut { display: none; margin-left: 0; width: 100%; }
+  .khu-bang.mo .khu-bang__nut { display: flex; }
   .khu-bang__nut .nut { flex: 1 1 auto; }
+  .khu-bang.mo .khu-bang__than { height: 38vh; }
 
+  /* Chan trang nhuong cho cho ban do; trang thong ke va quan trac van giu */
+  .than-trang ~ .chan-trang { display: none; }
   .chan-trang__cot:last-child { margin-left: 0; text-align: left; }
-  .hop-toa-do { display: none; }
 }
 
 /* ----- Nen ban do dung tu du lieu dia phuong ----- */

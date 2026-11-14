@@ -57,24 +57,63 @@ function cap_nhat_dai_thong_bao() {
 }
 
 /* --------------------------------------------------------------------------
+   Thu gon, mo hai bang hai ben
+   --------------------------------------------------------------------------
+   ben la 'trai' (lop du lieu) hoac 'phai' (thong tin doi tuong). Nguong
+   860px phai khop voi khoi @media (max-width: 860px) trong style.css.
+   -------------------------------------------------------------------------- */
+function la_man_hinh_hep() {
+  return !!window.matchMedia && window.matchMedia('(max-width: 860px)').matches;
+}
+
+function dang_thu_gon(ben) {
+  return document.querySelector('.than-trang').classList.contains('thu-' + ben);
+}
+
+function dat_thu_gon(ben, thu) {
+  var than = document.querySelector('.than-trang');
+  if (thu) than.classList.add('thu-' + ben);
+  else than.classList.remove('thu-' + ben);
+
+  /* Mui ten chi huong ma bang se di khi bam */
+  var mui_trai = '&#10094;', mui_phai = '&#10095;';
+  var nut = document.getElementById('thu-gon-' + ben);
+  if (ben === 'trai') nut.innerHTML = thu ? mui_phai : mui_trai;
+  else nut.innerHTML = thu ? mui_trai : mui_phai;
+
+  /* Tren dien thoai moi luc chi mo mot ngan, neu khong hai ngan de len nhau */
+  if (!thu && la_man_hinh_hep()) {
+    var ben_kia = ben === 'trai' ? 'phai' : 'trai';
+    if (!dang_thu_gon(ben_kia)) dat_thu_gon(ben_kia, true);
+  }
+
+  if (typeof ban_do !== 'undefined' && ban_do) {
+    setTimeout(function () { ban_do.invalidateSize(); }, 220);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
    Gan su kien cho toan bo giao dien
    -------------------------------------------------------------------------- */
 function gan_su_kien_giao_dien() {
 
   /* ----- Thu gon hai bang hai ben ----- */
   document.getElementById('thu-gon-trai').addEventListener('click', function () {
-    var than = document.querySelector('.than-trang');
-    than.classList.toggle('thu-trai');
-    this.innerHTML = than.classList.contains('thu-trai') ? '&#10095;' : '&#10094;';
-    setTimeout(function () { ban_do.invalidateSize(); }, 220);
+    dat_thu_gon('trai', !dang_thu_gon('trai'));
   });
 
   document.getElementById('thu-gon-phai').addEventListener('click', function () {
-    var than = document.querySelector('.than-trang');
-    than.classList.toggle('thu-phai');
-    this.innerHTML = than.classList.contains('thu-phai') ? '&#10094;' : '&#10095;';
-    setTimeout(function () { ban_do.invalidateSize(); }, 220);
+    dat_thu_gon('phai', !dang_thu_gon('phai'));
   });
+
+  /* Tren dien thoai hai bang la ngan truot phu len ban do (xem khoi
+     max-width: 860px trong style.css), nen mo trang thi thu san ca hai de
+     thay ban do truoc. */
+  if (la_man_hinh_hep()) {
+    dat_thu_gon('trai', true);
+    dat_thu_gon('phai', true);
+  }
 
   /* ----- Bo loc ----- */
   document.getElementById('ap-dung-loc').addEventListener('click', ap_dung_loc);
@@ -122,6 +161,12 @@ function gan_su_kien_giao_dien() {
     var khu = document.getElementById('khu-bang');
     khu.classList.toggle('mo');
     this.setAttribute('aria-expanded', khu.classList.contains('mo') ? 'true' : 'false');
+    /* Tren dien thoai bang thuoc tinh da chiem gan nua man hinh; de them mot
+       ngan truot len nua thi khong con thay ban do. */
+    if (khu.classList.contains('mo') && la_man_hinh_hep()) {
+      dat_thu_gon('trai', true);
+      dat_thu_gon('phai', true);
+    }
     setTimeout(function () { ban_do.invalidateSize(); }, 220);
   });
 
